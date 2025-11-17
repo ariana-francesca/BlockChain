@@ -1,0 +1,21 @@
+/*
+Problem 2: Write a program that takes in two numbers as input. The first number should be within the range of 5-10 (inclusive). The second number will be multiplied by itself several times equal to the first number. Validate user input to ensure it meets these requirements.
+Contract name: MyInclusive
+Sample output:
+Input number from 5-10: 7
+Input number from 1-5: 3
+Answer: 2187
+*/
+
+// SPDX-License-Identifier: HAU
+pragma solidity ^0.8.0;
+
+contract MyInclusive {
+    uint256 public answer;
+
+    function calculate(uint256 num1, uint256 num2) public {
+        require(num1 >=5 && num1 <=10, "First number must be 5-10 (required).");
+        require(num2 >=1 && num2 <=5, "Second number must be 1-5 (required).");
+        answer = num2 ** num1;
+    }
+}
