@@ -1,0 +1,30 @@
+/*Problem 1: write a Solidity program that accepts two strings as input (for instance, "Blockchain" and "Technology"), concatenates them, and outputs the combined string.
+Contract name: MyConcat
+String1: Blockchain
+String2: Technology
+Combined Strings:BlockchainTechnology*/
+
+// SPDX-License-Identifier: HAU
+pragma solidity ^0.8.0;
+
+contract MyConcat {
+    string public fullmessage;
+    string public message1;
+    string public message2;
+
+    constructor(string memory initialMessage1, string memory initialMessage2){
+        message1 = initialMessage1;
+        message2 = initialMessage2;
+        fullmessage = string.concat(message1, message2);
+    }
+
+    function updateMessages(string memory initialMessage1, string memory initialMessage2) public {
+        message1 = initialMessage1;
+        message2 = initialMessage2;
+        fullmessage = string.concat(message1, message2);
+    }
+
+    function viewfullMessage() public view returns (string memory) {
+        return fullmessage; 
+    }
+}
