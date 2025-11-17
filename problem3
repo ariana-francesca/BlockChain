@@ -1,0 +1,26 @@
+/*
+Problem 3: Write a program that accepts two numbers as inputs. Your program should count the number of odd numbers in x and even numbers in y, and provide methods to display these counts.
+Contract name: MyNumber
+Sample output:
+Input value for X: 17
+Input value for Y: 16
+Odd numbers for X: 9
+Even numbers for Y:8
+*/
+
+// SPDX-License-Identifier: HAU
+pragma solidity ^0.8.0;
+
+contract MyNumber {
+    uint256 public x;
+    uint256 public y;
+    uint256 public oddNum1;
+    uint256 public evenNum2;
+
+    function setInput(uint256 numberX, uint256 numberY) public {
+        x = numberX;
+        y = numberY;
+        evenNum2 = numberY / 2;
+        oddNum1 = (numberX + 1) / 2;
+    }
+}
