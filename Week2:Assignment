@@ -1,0 +1,53 @@
+// SPDX-License-Identifier: HAU
+pragma solidity ^0.8.0;
+
+contract MyLoanContract {
+    string public name = "Ariana Francesca Punsalang";
+    struct LoanResult {
+        string clientName;
+        uint principal;
+        uint yearsCount;
+        uint interestRate;
+        uint totalInterest;
+        uint totalPrincipalAfterPeriod;
+        uint monthlyAmortization;
+        string preparedBy;
+    }
+
+    LoanResult public latestComputation;
+    function computeLoan(
+        string memory _clientName,
+        uint _principal,
+        uint _years
+    ) 
+    
+    public {uint rate;
+    if (_principal >= 20000 && _principal <= 40000) {
+            rate = 856; 
+        } else if (_principal >= 40001 && _principal <= 60000) {
+            rate = 935;
+        } else if (_principal >= 60001 && _principal <= 85000) {
+            rate = 1050;
+        } else if (_principal >= 85001) {
+            rate = 1275;
+        } uint totalInterest = 0;
+        for (uint i = 0; i < _years; i++) {
+            uint yearlyInterest = (_principal * rate) / 10000;
+            totalInterest += yearlyInterest;
+        } uint totalPrincipalAfter = _principal + totalInterest;
+
+        uint monthly = totalPrincipalAfter * 100 / (_years * 12);
+        monthly = monthly / 100;
+
+        latestComputation = LoanResult(
+            _clientName,
+            _principal,
+            _years,
+            rate,
+            totalInterest,
+            totalPrincipalAfter,
+            monthly,
+            name
+        );
+    }
+}
