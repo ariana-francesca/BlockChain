@@ -1,0 +1,38 @@
+// SPDX-License-Identifier: HAU
+pragma solidity ^0.8.0;
+
+contract StudentGrades {
+    struct Student {
+        string name;
+        string grade;
+        string program;
+    }
+
+    mapping(address => Student) public studentRecords;
+
+    constructor() {
+        studentRecords[0x5B38Da6a701c568545dCfcB03FcB875f56beddC4] = Student("Arcely", "89", "CS");
+        studentRecords[0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2] = Student("Thel", "90", "WD");
+    }
+
+    function setStudentData(address studentAddress, string memory name, string memory grade, string memory program) public {
+        Student memory newStudent;
+        newStudent.name = name;
+        newStudent.grade = grade;
+        newStudent.program = program;
+
+        studentRecords[studentAddress] = newStudent;
+    }
+
+    function getStudentName(address studentAddress) public view returns (string memory) {
+        return studentRecords[studentAddress].name;
+    }
+
+    function getStudentGrade(address studentAddress) public view returns (string memory) {
+        return studentRecords[studentAddress].grade;
+    }
+
+    function getStudentProgram(address studentAddress) public view returns (string memory) {
+        return studentRecords[studentAddress].program;
+    }
+}
