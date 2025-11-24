@@ -1,0 +1,56 @@
+//Name: Punsalang, Ariana Francesca N.
+//Course Code: 2231-6BLOCKTECH
+//Date: November 24, 2025
+
+// SPDX-License-Identifier: HAU
+pragma solidity ^0.8.0;
+
+contract StudentProfile{
+    struct StudentRecord{
+        string fullName;
+        string year;
+        string program;
+        uint256 average;
+        string remarks;
+    }
+
+    mapping(address => StudentRecord) public studentRecords;
+
+        constructor() {
+        studentRecords[0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2] = StudentRecord("Kim Namjoon", "2", "CS", 8275, "Passed");
+        studentRecords[0x617F2E2fD72FD9D5503197092aC168c91465E7f2] = StudentRecord("Park Jimin", "3", "WD", 9210, "Passed");
+        studentRecords[0x5c6B0f7Bf3E7ce046039Bd8FABdfD3f9F5021678] = StudentRecord("Min Yoongi", "4", "CYB", 8510, "Passed");
+        studentRecords[0x1aE0EA34a72D944a8C7603FfB3eC30a6669E454C] = StudentRecord("Kim Seokjin", "4", "NA", 7420,"Failed");
+    }
+
+    function _getRemark(uint256 average) internal pure returns (string memory) {
+        if (average < 75) { 
+            return "Failed";
+        } else {
+            return "Passed";
+        }
+    }
+
+    function updateStudentData(address studentAddress, string memory fullName, string memory year, string memory program) public {
+        StudentRecord memory newStudent;
+        newStudent.fullName = fullName;
+        newStudent.year = year;
+        newStudent.program = program;
+
+        studentRecords[studentAddress] = newStudent;
+    }
+
+    function addRecord(address studentAddress, string memory fullName, string memory year, string memory program) public {
+    studentRecords[studentAddress] = StudentRecord(fullName, year, program, 0, "Pending");
+    }
+
+    function computeGrades(address studentAddress, uint256 prelim, uint256 midterm, uint256 finals) public returns (uint256 average, string memory remarks) {
+        average = (prelim + midterm + finals) / 3;
+        remarks = _getRemark(average);
+
+        studentRecords[studentAddress].average = average;
+        studentRecords[studentAddress].remarks = remarks;
+
+        return (average, remarks);
+    }
+}
